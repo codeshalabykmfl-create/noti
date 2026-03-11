@@ -1,14 +1,70 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Notification Test</title>
+<meta charset="UTF-8">
+<title>CodeShala Notifications</title>
+
+<style>
+
+body{
+font-family: Arial, sans-serif;
+background: linear-gradient(135deg,#1e3c72,#2a5298);
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+margin:0;
+}
+
+.card{
+background:white;
+padding:40px;
+border-radius:15px;
+box-shadow:0 10px 25px rgba(0,0,0,0.2);
+text-align:center;
+width:350px;
+}
+
+h1{
+color:#333;
+margin-bottom:10px;
+}
+
+p{
+color:#777;
+margin-bottom:30px;
+}
+
+button{
+background:#ff6a00;
+border:none;
+padding:15px 30px;
+color:white;
+font-size:16px;
+border-radius:8px;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+background:#ff8c42;
+transform:scale(1.05);
+}
+
+</style>
 </head>
 
 <body>
 
-<h2>Enable Notification</h2>
+<div class="card">
 
-<button onclick="enableNotification()">Enable Notification</button>
+<h1>🔔 CodeShala Notifications</h1>
+
+<p>Subscribe to get coding updates and live class alerts.</p>
+
+<button onclick="subscribe()">Subscribe</button>
+
+</div>
 
 <script type="module">
 
@@ -16,30 +72,30 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/fireba
 import { getMessaging, getToken } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyAKF6Z9HSbF_m1L6QYUMAb6xc-20o2IYSc",
-  authDomain: "massege-5ec76.firebaseapp.com",
-  projectId: "massege-5ec76",
-  storageBucket: "massege-5ec76.firebasestorage.app",
-  messagingSenderId: "837311654111",
-  appId: "1:837311654111:web:4bdf723a6f16ae301c616a"
+apiKey: "AIzaSyAKF6Z9HSbF_m1L6QYUMAb6xc-20o2IYSc",
+authDomain: "massege-5ec76.firebaseapp.com",
+projectId: "massege-5ec76",
+storageBucket: "massege-5ec76.firebasestorage.app",
+messagingSenderId: "837311654111",
+appId: "1:837311654111:web:4bdf723a6f16ae301c616a"
 };
 
 const app = initializeApp(firebaseConfig);
 const messaging = getMessaging(app);
 
-window.enableNotification = async function(){
+window.subscribe = async function(){
 
 const permission = await Notification.requestPermission();
 
 if(permission === "granted"){
 
-const token = await getToken(messaging, {
-vapidKey: "BHRZJXMRd4uZhclHDOd2d_UC7wgrflVsTa7fSqtEJoOp7rXu7fo1UJ6SA_lfUadtcg18mfRv_KHArlHIlx28WJw"
+const token = await getToken(messaging,{
+vapidKey:"BHRZJXMRd4uZhclHDOd2d_UC7wgrflVsTa7fSqtEJoOp7rXu7fo1UJ6SA_lfUadtcg18mfRv_KHArlHIlx28WJw"
 });
 
 console.log("TOKEN:",token);
 
-alert("Notification Enabled");
+alert("Subscribed Successfully 🔔");
 
 }else{
 
